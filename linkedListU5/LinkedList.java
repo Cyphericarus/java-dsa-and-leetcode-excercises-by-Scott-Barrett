@@ -1,4 +1,4 @@
-package linkedListU5;
+package coding.linkedListU5;
 
 public class LinkedList {
     private Node head;
@@ -13,12 +13,24 @@ public class LinkedList {
             this.value = value;
         }
     }
-
+    
     public LinkedList(int value) {
         Node newNode = new Node(value);
         head = newNode;
         tail = newNode;
         length = 1;
+    }
+
+    public Node getHead() {
+        return head;
+    }
+
+    public Node getTail() {
+        return tail;
+    }
+
+    public int getLength() {
+        return length;
     }
 
     public void append(int value) {
@@ -79,14 +91,6 @@ public class LinkedList {
         return temp;
     }
 
-    public void printList() {
-        Node temp = head;
-        while (temp != null) {
-            System.out.println(temp.value);
-            temp = temp.next;
-        }
-    }
-
     public Node get(int index) {
         if (index < 0 || index >= length)
             return null;
@@ -122,6 +126,7 @@ public class LinkedList {
 
         Node newNode = new Node(value);
         Node temp = get(index - 1);
+
         newNode.next = temp.next;
         temp.next = newNode;
         length++;
@@ -135,14 +140,48 @@ public class LinkedList {
         if (index == 0)
             return removeFirst();
 
-        if (index == length-1)
+        if (index == length - 1)
             return removeLast();
 
         Node prev = get(index - 1);
         Node temp = prev.next;
+
         prev.next = temp.next;
         temp.next = null;
         length--;
         return temp;
+    }
+
+    public void reverse() {
+        if (head == null || head == tail)
+            return;
+
+        Node temp = head;
+        head = tail;
+        tail = temp;
+
+        Node after = temp.next;
+        Node before = null;
+
+        for (int i = 0; i < length; i++) {
+            after = temp.next;
+            temp.next = before;
+            before = temp;
+            temp = after;
+        }
+    }
+
+    public void clear() {
+        head = null;
+        tail = null;
+        length = 0;
+    }
+
+    public void printList() {
+        Node temp = head;
+        while (temp != null) {
+            System.out.println(temp.value);
+            temp = temp.next;
+        }
     }
 }
