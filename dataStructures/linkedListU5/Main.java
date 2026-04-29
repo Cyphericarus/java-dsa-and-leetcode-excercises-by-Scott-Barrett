@@ -1,5 +1,4 @@
-package coding.linkedListU5;
-
+package coding.dataStructures.linkedListU5;
 public class Main {
     public static void main(String[] args) {
 

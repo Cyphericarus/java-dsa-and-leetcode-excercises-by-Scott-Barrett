@@ -1,4 +1,4 @@
-package coding.linkedListU5;
+package coding.dataStructures.linkedListU5;
 
 public class LinkedList {
     private Node head;

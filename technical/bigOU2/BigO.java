@@ -1,4 +1,4 @@
-package coding.bigOU2;
+package coding.technical.bigOU2;
 
 public class BigO {
     public static void main(String[] args) {
