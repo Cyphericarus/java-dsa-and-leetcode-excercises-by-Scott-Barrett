@@ -13,29 +13,19 @@ public class LinkedList {
             this.value = value;
         }
     }
-    
+
+    // constructor
     public LinkedList(int value) {
         Node newNode = new Node(value);
+
         head = newNode;
         tail = newNode;
         length = 1;
     }
 
-    public Node getHead() {
-        return head;
-    }
-
-    public Node getTail() {
-        return tail;
-    }
-
-    public int getLength() {
-        return length;
-    }
-
+    // append
     public void append(int value) {
         Node newNode = new Node(value);
-
         if (length == 0) {
             head = newNode;
             tail = newNode;
@@ -46,11 +36,12 @@ public class LinkedList {
         length++;
     }
 
+    // removeLast
     public Node removeLast() {
         if (length == 0)
             return null;
-        Node temp = head;
         Node pre = head;
+        Node temp = head;
 
         while (temp.next != null) {
             pre = temp;
@@ -66,6 +57,7 @@ public class LinkedList {
         return temp;
     }
 
+    // prepend
     public void prepend(int value) {
         Node newNode = new Node(value);
 
@@ -79,9 +71,11 @@ public class LinkedList {
         length++;
     }
 
+    // removeFirst
     public Node removeFirst() {
         if (length == 0)
             return null;
+            
         Node temp = head;
         head = head.next;
         temp.next = null;
@@ -91,18 +85,22 @@ public class LinkedList {
         return temp;
     }
 
+    // get
     public Node get(int index) {
         if (index < 0 || index >= length)
             return null;
         Node temp = head;
+
         for (int i = 0; i < index; i++) {
             temp = temp.next;
         }
         return temp;
     }
 
+    // set
     public boolean set(int index, int value) {
         Node temp = get(index);
+
         if (temp != null) {
             temp.value = value;
             return true;
@@ -110,58 +108,54 @@ public class LinkedList {
         return false;
     }
 
+    // insert
     public boolean insert(int index, int value) {
         if (index < 0 || index > length)
             return false;
-
         if (index == 0) {
             prepend(value);
             return true;
         }
-
         if (index == length) {
             append(value);
             return true;
         }
-
         Node newNode = new Node(value);
-        Node temp = get(index - 1);
-
-        newNode.next = temp.next;
-        temp.next = newNode;
+        Node pre = get(index - 1);
+        newNode.next = pre.next;
+        pre.next = newNode;
         length++;
         return true;
     }
 
+    // remove
     public Node remove(int index) {
         if (index < 0 || index >= length)
             return null;
-
         if (index == 0)
             return removeFirst();
-
         if (index == length - 1)
             return removeLast();
 
-        Node prev = get(index - 1);
-        Node temp = prev.next;
-
-        prev.next = temp.next;
+        Node pre = get(index - 1);
+        Node temp = pre.next;
+        pre.next = temp.next;
         temp.next = null;
         length--;
         return temp;
     }
 
+    // reverse
     public void reverse() {
-        if (head == null || head == tail)
+        if (length == 0 || length == 1)
             return;
 
         Node temp = head;
         head = tail;
         tail = temp;
 
-        Node after = temp.next;
         Node before = null;
+        Node after = temp.next;
 
         for (int i = 0; i < length; i++) {
             after = temp.next;
@@ -171,17 +165,36 @@ public class LinkedList {
         }
     }
 
+    // clear
     public void clear() {
         head = null;
         tail = null;
         length = 0;
     }
 
+    // printList
     public void printList() {
         Node temp = head;
+
         while (temp != null) {
             System.out.println(temp.value);
             temp = temp.next;
         }
     }
+
+    // getHead
+    public Node getHead() {
+        return head;
+    }
+
+    // getTail
+    public Node getTail() {
+        return tail;
+    }
+
+    // getLength
+    public int getLength() {
+        return length;
+    }
+    
 }
